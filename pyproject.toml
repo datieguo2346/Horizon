@@ -46,6 +46,7 @@ horizon-mcp = "src.mcp.server:main"
 horizon-wizard = "src.setup.wizard:main"
 horizon-chatgpt = "src.setup.chatgpt:main"
 horizon-webhook = "src.services.webhook_cli:main"
+horizon-sns = "src.services.sns_drafts:main"
 horizon-wechat = "src.services.wechat_cli:main"
 
 [build-system]

@@ -60,6 +60,13 @@
         "repo": "triton",
         "enabled": true,
         "profile": "tech-news"
+      },
+      {
+        "type": "repo_releases",
+        "owner": "deepseek-ai",
+        "repo": "DeepSeek-V3",
+        "enabled": true,
+        "profile": "tech-news"
       }
     ],
     "hackernews": {
@@ -120,6 +127,27 @@
         "enabled": true,
         "category": "linux-kernel",
         "profile": "tech-news"
+      },
+      {
+        "name": "量子位",
+        "url": "https://wechat2rss.xlab.app/feed/7131b577c61365cb47e81000738c10d872685908.xml",
+        "enabled": true,
+        "category": "ai-news-zh",
+        "profile": "tech-news"
+      },
+      {
+        "name": "新智元",
+        "url": "https://wechat2rss.xlab.app/feed/ede30346413ea70dbef5d485ea5cbb95cca446e7.xml",
+        "enabled": true,
+        "category": "ai-news-zh",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Solidot",
+        "url": "https://www.solidot.org/index.rss",
+        "enabled": true,
+        "category": "tech-news-zh",
+        "profile": "tech-news"
       }
     ],
     "reddit": {
@@ -157,6 +185,16 @@
           "profile": ["tech-news", "finance-news"]
         }
       ]
+    },
+    "google_news": {
+      "enabled": true,
+      "query": "人工智能 OR 大模型",
+      "language": "zh-CN",
+      "country": "CN",
+      "ceid": "CN:zh-Hans",
+      "max_results": 12,
+      "category": "ai-news-zh",
+      "profile": "tech-news"
     }
   },
   "collection": {
