@@ -2,8 +2,9 @@ name: Daily Horizon Summary
 
 on:
   schedule:
-    # GitHub scheduled workflows use UTC. 20:00 UTC is 04:00 Asia/Shanghai;
-    # this intentionally runs early to offset the observed schedule delay.
+    # GitHub scheduled workflows use UTC. 23:00 UTC is 07:00 Asia/Shanghai.
+    # The expression is unchanged from the upstream template; scheduled runs
+    # can still start later than the cron time.
     - cron: '0 23 * * *'
   workflow_dispatch:      # Allow manual trigger
 
@@ -47,6 +48,26 @@ jobs:
 
       - name: Set current date as environment variable
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Generate SNS drafts
+        env:
+          # Same provider secrets as the Horizon step. Draft generation reuses
+          # data/config.json; a missing key falls back to the template writer.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          uv run python -m src.services.sns_drafts --data-dir data --config data/config.json
+          mkdir -p docs/sns-drafts
+          cp -a data/sns-drafts/. docs/sns-drafts/
+
+      - name: Upload SNS drafts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sns-drafts
+          path: data/sns-drafts/
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

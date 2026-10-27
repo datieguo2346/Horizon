@@ -304,7 +304,7 @@ docker compose run --rm horizon [OPTIONS]
 
 ### 4. Automate (Optional)
 
-Schedule Horizon with **GitHub Actions** using the [daily workflow template](.github/workflows/daily-summary.yml.disabled). The template is disabled in this repository; configure it for your deployment and rename it to `daily-summary.yml` to enable it.
+Schedule Horizon with **GitHub Actions** using [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml). The workflow keeps the daily schedule and `workflow_dispatch`, then writes X and Xiaohongshu drafts. See [DEPLOY.md](DEPLOY.md) for secrets, GitHub Pages, and the draft files. This repository does not post to X or Xiaohongshu.
 
 ## Supported Sources
 

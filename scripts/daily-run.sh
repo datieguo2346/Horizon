@@ -38,6 +38,14 @@ uv sync --locked --quiet
 # 3. Run Horizon
 uv run --locked horizon --hours 24
 
+# 3b. SNS drafts (X + Xiaohongshu). Template fallback if no API key.
+#     Actual posting is outside this repository. See DEPLOY.md.
+uv run --locked python -m src.services.sns_drafts --data-dir data
+mkdir -p docs/sns-drafts
+if [ -d data/sns-drafts ]; then
+    cp -a data/sns-drafts/. docs/sns-drafts/
+fi
+
 # 4. Deploy docs to gh-pages
 echo "$LOG_PREFIX Deploying to gh-pages..."
 
